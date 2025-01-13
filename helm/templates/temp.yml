@@ -34,7 +34,23 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}"
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent
           args: ["-msg", "{{ .Values.msg  }}"]
           ports:
           - containerPort: 10100
+          volumeMounts:
+          - name: config-volume
+            mountPath: /
+      volumes:
+      - name: config-volume
+        configMap:
+          name: test-configmap
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+data:
+  config.json: |-
+{{ .Files.Get "config.json" | indent 4}}
