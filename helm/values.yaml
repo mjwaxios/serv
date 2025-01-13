@@ -1,4 +1,4 @@
 msg: good bye to all
 image:
-  repository: localhost:5000/serv:1.0.3
+  repository: localhost:5000/serv:1.0.2
     
