@@ -1,0 +1,4 @@
+msg: good bye to all
+image:
+  repository: localhost/serv:latest
+    

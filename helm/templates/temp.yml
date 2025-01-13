@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: serv
+  labels:
+    app: serv
+spec:
+  type: NodePort
+  ports:
+  - port: 10100
+    targetPort: 10100
+    nodePort: 30100
+    protocol: TCP
+    name: rest
+  selector:
+    app: serv
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: serv
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serv
+  template:
+    metadata:
+      labels:
+        app: serv
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}"
+          imagePullPolicy: Never
+          args: ["-msg", "{{ .Values.msg  }}"]
+          ports:
+          - containerPort: 10100
