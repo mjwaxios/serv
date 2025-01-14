@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}"
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: IfNotPresent
           args: ["-msg", "{{ .Values.msg  }}"]
           ports:

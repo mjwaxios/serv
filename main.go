@@ -32,6 +32,7 @@ func ReadConfig() {
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
+	ReadConfig()
 	val++
 	if cfg.Message == "" {
 		// No Config File so lets status an error
