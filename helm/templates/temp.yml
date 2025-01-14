@@ -40,7 +40,7 @@ spec:
           - containerPort: 10100
           volumeMounts:
           - name: config-volume
-            mountPath: /
+            mountPath: /config
       volumes:
       - name: config-volume
         configMap:

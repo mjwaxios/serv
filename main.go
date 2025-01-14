@@ -19,7 +19,7 @@ var msg string
 var cfg Config
 
 func ReadConfig() {
-	jsonFile, err := os.Open("config.json")
+	jsonFile, err := os.Open("config/config.json")
 	if err != nil {
 		log.Println(err)
 		return
