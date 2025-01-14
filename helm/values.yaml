@@ -1,4 +1,7 @@
 msg: good bye to all
+cfgmsg: message values.yml
+nodePort: 30100
+appPort: 10100
 image:
   repository: localhost:5000/serv
     

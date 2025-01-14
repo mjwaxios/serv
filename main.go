@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 type Config struct {
@@ -18,7 +19,7 @@ var val int
 var msg string
 var cfg Config
 
-func ReadConfig() {
+func ReadConfig(quite bool) {
 	jsonFile, err := os.Open("config/config.json")
 	if err != nil {
 		log.Println(err)
@@ -26,13 +27,15 @@ func ReadConfig() {
 	}
 	defer jsonFile.Close()
 
-	log.Println("Successfully Opened config.json")
+	if !quite {
+		log.Println("Successfully Opened config.json")
+	}
 	byteValue, _ := io.ReadAll(jsonFile)
 	json.Unmarshal(byteValue, &cfg)
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
-	ReadConfig()
+	ReadConfig(true)
 	val++
 	if cfg.Message == "" {
 		// No Config File so lets status an error
@@ -42,9 +45,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	ReadConfig()
+	ReadConfig(false)
+	var port int
 	flag.StringVar(&msg, "msg", "Hello World", "message to write out")
+	flag.IntVar(&port, "port", 10100, "port to listen to")
 	flag.Parse()
+	log.Printf("listening to port %v\n", port)
 	http.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":10100", nil))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), nil))
 }
