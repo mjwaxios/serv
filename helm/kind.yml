@@ -1,0 +1,7 @@
+msg: hi
+cfgmsg: from kind-kind
+nodePort: 30105
+appPort: 10100
+image:
+  repository: localhost:5000/serv
+    

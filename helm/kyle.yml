@@ -1,0 +1,7 @@
+msg: Hello World
+cfgmsg: Kyle's Box
+nodePort: 30102
+appPort: 10100
+image:
+  repository: localhost:5000/serv
+    

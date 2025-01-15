@@ -1,0 +1,7 @@
+msg: Command line messages here
+cfgmsg: Virgil cmap
+nodePort: 30101
+appPort: 10100
+image:
+  repository: localhost:5000/serv
+    
