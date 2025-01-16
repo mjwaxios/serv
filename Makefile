@@ -6,3 +6,6 @@ image:	serv
 
 copy:
 	skopeo copy containers-storage:localhost/serv:latest docker://localhost:5000/serv:$(VER)
+
+clean:
+	rm serv
